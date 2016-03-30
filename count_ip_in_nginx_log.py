@@ -1,14 +1,25 @@
 from collections import Counter
 import io
+import re
 
+# Arguments to set
 FILE = 'access.log'
 LIMIT = 10
+SEGMENT_TO_COUNT = 'ip_address'
+
+nginx_access_log_regex = re.compile(
+    r'(?P<ip_address>.*?)\ \-\ (?P<remote_user>.*?)\ \[(?P<time_local>.*?)\]'
+    '\ \"(?P<request>.*?)\"\ (?P<status>.*?)\ (?P<body_bytes_sent>.*?)\ '
+    '\"(?P<http_referer>.*?)\"\ \"(?P<http_user_agent>.*?)\"',
+    re.IGNORECASE
+)
 
 with io.open(FILE, 'r') as log_file:
     c = Counter([
-        line.split(' ', 1)[0]
+        nginx_access_log_regex.match(line).group(SEGMENT_TO_COUNT)
         for line in log_file.readlines()
     ])
+
 
 table_header = (
     "Top {limit} Most Frequently Logged IP Addresses".format(limit=LIMIT)
