@@ -9,8 +9,8 @@ SEGMENT_TO_COUNT = 'ip_address'
 
 nginx_access_log_regex = re.compile(
     r'(?P<ip_address>.*?)\ \-\ (?P<remote_user>.*?)\ \[(?P<time_local>.*?)\]'
-    '\ \"(?P<request>.*?)\"\ (?P<status>.*?)\ (?P<body_bytes_sent>.*?)\ '
-    '\"(?P<http_referer>.*?)\"\ \"(?P<http_user_agent>.*?)\"',
+    r'\ \"(?P<request>.*?)\"\ (?P<status>.*?)\ (?P<body_bytes_sent>.*?)\ '
+    r'\"(?P<http_referer>.*?)\"\ \"(?P<http_user_agent>.*?)\"',
     re.IGNORECASE
 )
 
