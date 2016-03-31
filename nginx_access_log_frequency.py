@@ -128,7 +128,8 @@ if __name__ == '__main__':
         '--file',
         type=str,
         default='/var/log/nginx/access.log',
-        help="The path on disk of the nginx access log you'd like evaluated."
+        help="The path on disk of the nginx access log you'd like evaluated. "
+             "Defaults to /var/log/nginx/access.log"
     )
 
     # Arguments to set
