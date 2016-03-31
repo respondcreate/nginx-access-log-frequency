@@ -5,6 +5,13 @@ nginx_access_log_frequency.py
 
 Determine the most frequently logged values from a standard nginx access log.
 
+Allowed data 'segments' to tally (with the -s/--segment argument):
+    * ip_address: IP Address
+    * remote_user: Remote User
+    * status_code: Status Code
+    * http_referrer: Referrer
+    * http_user_agent: User Agent
+
 Examples:
     Print out a list of the top 10 most frequently logged IP addresses:
 
