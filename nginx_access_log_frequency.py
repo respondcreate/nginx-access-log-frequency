@@ -90,7 +90,6 @@ def count_nginx_log_frequency(log_file_path,
     return c
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(
         description='Determine the most frequently logged values from a '
                     'standard nginx access log.'
@@ -152,10 +151,11 @@ if __name__ == '__main__':
         )
     )
     table_header_log = 'According to file: {}'.format(log_file_path)
-    table_header_len = len(table_header)
-    table_header_log_len = (table_header_len)
-    header_len = max(table_header_len, table_header_log_len)
-    header_separator = ''.ljust(table_header_len, '=')
+    header_len = max(
+        len(table_header),
+        len(table_header_log)
+    )
+    header_separator = ''.ljust(header_len, '=')
     print(header_separator)
     print(table_header.center(header_len))
     print(table_header_log.center(header_len))
