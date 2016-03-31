@@ -4,6 +4,17 @@
 nginx_access_log_frequency.py
 
 Determine the most frequently logged values from a standard nginx access log.
+
+Examples:
+    Print out a list of the top 10 most frequently logged IP addresses:
+
+        $ python nginx_access_log_frequency.py -s ip_address
+
+    Print out a list of the top 5 most frequently logged user agents from
+    a log file stored in a custom location:
+
+        $ python nginx_access_log_frequency.py -s http_user_agent -l 5
+          -f /var/log/custom-log-location/access.log
 """
 
 from __future__ import print_function
@@ -21,7 +32,15 @@ __copyright__ = 'Copyright 2016 Jonathan Ellenberger'
 class InvalidSegment(Exception):
     pass
 
-SEGMENT_VERBOSE_MAPPING = {
+NGINX_ACCESS_LOG_REGEX = re.compile(
+    r'(?P<ip_address>.*?)\ \-\ (?P<remote_user>.*?)\ \[(?P<time_local>.*?)'
+    r'\]\ \"(?P<request>.*?)\"\ (?P<status_code>.*?)\ '
+    r'(?P<body_bytes_sent>.*?)\ \"(?P<http_referrer>.*?)\"\ '
+    '\"(?P<http_user_agent>.*?)\"',
+    re.IGNORECASE
+)
+
+ACCESS_LOG_SEGMENT_VERBOSE_MAPPING = {
     'ip_address': {
         'verbose': 'IP Address',
         'verbose_plural': 'IP Addresses'
@@ -47,16 +66,8 @@ SEGMENT_VERBOSE_MAPPING = {
 ALLOWED_CHOICES_STR = "Allowed choices: {}.".format(
     ', '.join([
         "{} ({})".format(key, value['verbose'])
-        for key, value in SEGMENT_VERBOSE_MAPPING.iteritems()
+        for key, value in ACCESS_LOG_SEGMENT_VERBOSE_MAPPING.iteritems()
     ])
-)
-
-NGINX_ACCESS_LOG_REGEX = re.compile(
-    r'(?P<ip_address>.*?)\ \-\ (?P<remote_user>.*?)\ \[(?P<time_local>.*?)'
-    r'\]\ \"(?P<request>.*?)\"\ (?P<status_code>.*?)\ '
-    r'(?P<body_bytes_sent>.*?)\ \"(?P<http_referrer>.*?)\"\ '
-    '\"(?P<http_user_agent>.*?)\"',
-    re.IGNORECASE
 )
 
 
@@ -123,7 +134,7 @@ if __name__ == '__main__':
     top_list_limit = args.limit
     regex_group_key = args.segment
 
-    if regex_group_key not in SEGMENT_VERBOSE_MAPPING.keys():
+    if regex_group_key not in ACCESS_LOG_SEGMENT_VERBOSE_MAPPING.keys():
         raise InvalidSegment(
             "'{}' is an invalid data segment type. {}".format(
                 regex_group_key,
@@ -145,7 +156,7 @@ if __name__ == '__main__':
     table_header = (
         "Top {limit} Most Frequently Logged {segment_verbose_plural}".format(
             limit=top_list_limit,
-            segment_verbose_plural=SEGMENT_VERBOSE_MAPPING[
+            segment_verbose_plural=ACCESS_LOG_SEGMENT_VERBOSE_MAPPING[
                 regex_group_key
             ][verbose_key]
         )
