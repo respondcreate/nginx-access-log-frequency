@@ -83,11 +83,10 @@ def count_nginx_log_frequency(log_file_path,
     certain values in a nginx log file.
 
     Args:
-        log_file_path: The path on disc of the nginx log file to process.
-        regex_group_key: The named group of `per_line_regex` to count.
-
-    Keyword Args:
-        per_line_regex: The regex used to parse each line of `log_file_path`.
+        log_file_path (str): The path on disc of the nginx log file to process.
+        regex_group_key (str): The named group of `per_line_regex` to count.
+        per_line_regex (str): The regex used to parse each line of
+            `log_file_path`.
 
     Returns:
         A collections.Counter instance.
