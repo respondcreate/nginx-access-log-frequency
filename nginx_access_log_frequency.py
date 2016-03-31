@@ -30,6 +30,10 @@ __copyright__ = 'Copyright 2016 Jonathan Ellenberger'
 
 
 class InvalidSegment(Exception):
+    """
+    An Exception for notifying a user that they entered a non-supported
+    data segment for tallying.
+    """
     pass
 
 NGINX_ACCESS_LOG_REGEX = re.compile(
