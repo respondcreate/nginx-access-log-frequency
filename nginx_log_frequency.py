@@ -67,7 +67,7 @@ parser.add_argument(
     '-f',
     '--file',
     type=str,
-    default='/etc/nginx/access.log',
+    default='/var/log/nginx/access.log',
     help="The path on disk of the nginx access log you'd like evaluated."
 )
 
