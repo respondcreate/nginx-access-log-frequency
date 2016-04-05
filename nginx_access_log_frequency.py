@@ -110,7 +110,9 @@ def count_nginx_log_frequency(log_file_path,
         ])
     return c
 
-if __name__ == '__main__':
+
+def create_parser():
+    """Create a command line parser for this module."""
     parser = argparse.ArgumentParser(
         description='Determine the most frequently logged values from a '
                     'standard nginx access log.'
@@ -138,6 +140,11 @@ if __name__ == '__main__':
         help="The path on disk of the nginx access log you'd like evaluated. "
              "Defaults to /var/log/nginx/access.log"
     )
+    return parser
+
+
+if __name__ == '__main__':
+    parser = create_parser()
 
     # Arguments to set
     args = parser.parse_args()
