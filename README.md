@@ -43,7 +43,3 @@ $ python nginx_access_log_frequency.py -s http_user_agent -l 5 -f /var/log/custo
 ```
 
 **NOTE:** If you've cloned down this repo and want to test this script but don't have an nginx access log handy just include `-f example-access.log` to use the included example log.
-
-
-
-
