@@ -29,6 +29,18 @@ import argparse
 from collections import Counter
 import io
 import re
+try:
+    dict.iteritems
+except AttributeError:
+    # Python 3
+    def iteritems(d):
+        """Define iteritems for Python 3."""
+        return iter(d.items())
+else:
+    # Python 2
+    def iteritems(d):
+        """Define iteritems for Python 2."""
+        return d.iteritems()
 
 __version__ = '0.1'
 __author__ = 'Jonathan Ellenberger'
@@ -80,7 +92,7 @@ ACCESS_LOG_SEGMENT_VERBOSE_MAPPING = {
 ALLOWED_CHOICES_STR = "Allowed choices: {}.".format(
     ', '.join([
         "{} ({})".format(key, value['verbose'])
-        for key, value in ACCESS_LOG_SEGMENT_VERBOSE_MAPPING.iteritems()
+        for key, value in iteritems(ACCESS_LOG_SEGMENT_VERBOSE_MAPPING)
     ])
 )
 
