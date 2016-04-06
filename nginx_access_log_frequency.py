@@ -145,13 +145,20 @@ def create_parser():
     return parser
 
 
-def print_report(counter_instance, top_list_length):
+def print_report(counter_instance,
+                 regex_group_key,
+                 top_list_length,
+                 log_file_path):
     """
     Print a summary of the tally operation to the shell.
 
     Args:
         counter_instance (instance): A collections.Counter instance.
+        regex_group_key (str): The key for the verbose mapping in
+        ACCESS_LOG_SEGMENT_VERBOSE_MAPPING to use for the title section.
         top_list_length (int): The length of the 'top' list you'd like printed.
+        log_file_path (str): The path to the proceseed log file for inclusion
+        in the title section.
 
     Returns: None
     """
@@ -213,4 +220,4 @@ if __name__ == '__main__':
         regex_group_key,
         NGINX_ACCESS_LOG_REGEX
     )
-    print_report(c, top_list_limit)
+    print_report(c, regex_group_key, top_list_limit, log_file_path)
