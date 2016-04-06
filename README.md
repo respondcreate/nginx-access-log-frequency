@@ -4,29 +4,29 @@ Determine the most frequently logged values from a standard nginx access log.
 
 ## Optional Arguments
 
-### `-s <segment>`, `--segment <segment>`
+* `-s, --segment <segment>`
                         
-The data segment whose frequency you'd like to determine. Allowed choices:
+    The data segment whose frequency you'd like to determine. Allowed choices:
 
-* `status_code` (Status Code)
-* `remote_user` (Remote User)
-* `ip_address` (IP Address)
-* `http_user_agent` (User Agent)
-* `http_referrer` (Referrer)
+    * `status_code` (Status Code)
+    * `remote_user` (Remote User)
+    * `ip_address` (IP Address)
+    * `http_user_agent` (User Agent)
+    * `http_referrer` (Referrer)
 
-Default: `ip_address`
+    **Default:** `ip_address`
 
-### `-l <limit>`, `--limit <limit>`
+* `-l, --limit <limit>`
 
-An integer which determines the length of the list returned.
+    An integer which determines the length of the list returned.
 
-Default: 10
+    **Default:** `10`
 
-### `-f <path-to-access-log-file>`, `--file <path-to-access-log-file>`
+* `-f, --file <path-to-access-log-file>`
 
-The path on disk of the nginx access log you'd like evaluated.
+    The path on disk of the nginx access log you'd like evaluated.
 
-Default: `/var/log/nginx/access.log`
+    **Default:** `/var/log/nginx/access.log`
 
 ## Example Usage
 
