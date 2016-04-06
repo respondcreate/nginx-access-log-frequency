@@ -38,9 +38,12 @@ __copyright__ = 'Copyright 2016 Jonathan Ellenberger'
 
 class InvalidSegment(Exception):
     """
-    An Exception for notifying a user that they entered a non-supported
+    An Exception for signaling invalid segments.
+
+    Used to notifying users that they entered a non-supported
     data segment for tallying.
     """
+
     pass
 
 NGINX_ACCESS_LOG_REGEX = re.compile(
@@ -86,8 +89,7 @@ def count_nginx_log_frequency(log_file_path,
                               regex_group_key,
                               per_line_regex):
     """
-    Return a collections.Counter instance that tallies the appearance of
-    certain values in a nginx log file.
+    Tally the appearance of values in a nginx log file.
 
     Args:
         log_file_path (str): The path on disc of the nginx log file to process.
@@ -143,6 +145,52 @@ def create_parser():
     return parser
 
 
+def print_report(counter_instance, top_list_length):
+    """
+    Print a summary of the tally operation to the shell.
+
+    Args:
+        counter_instance (instance): A collections.Counter instance.
+        top_list_length (int): The length of the 'top' list you'd like printed.
+
+    Returns: None
+    """
+    if top_list_length > 1:
+        verbose_key = 'verbose_plural'
+    else:
+        verbose_key = 'verbose'
+
+    table_header = (
+        "Top {limit} Most Frequently Logged {segment_verbose_plural}".format(
+            limit=top_list_length,
+            segment_verbose_plural=ACCESS_LOG_SEGMENT_VERBOSE_MAPPING[
+                regex_group_key
+            ][verbose_key]
+        )
+    )
+    table_header_log = 'According to file: {}'.format(log_file_path)
+    header_len = max(
+        len(table_header),
+        len(table_header_log)
+    )
+    header_separator = ''.ljust(header_len, '=')
+    print(header_separator)
+    print(table_header.center(header_len))
+    print(table_header_log.center(header_len))
+    print(header_separator)
+    for num, payload in enumerate(
+        counter_instance.most_common(n=top_list_length), start=1
+    ):
+        ip, count = payload
+        print(
+            "{num}. {ip}: {count}".format(
+                num=str(num).rjust(2),
+                ip=ip.ljust(16),
+                count=count
+            )
+        )
+
+
 if __name__ == '__main__':
     parser = create_parser()
 
@@ -165,36 +213,4 @@ if __name__ == '__main__':
         regex_group_key,
         NGINX_ACCESS_LOG_REGEX
     )
-
-    if top_list_limit > 1:
-        verbose_key = 'verbose_plural'
-    else:
-        verbose_key = 'verbose'
-
-    table_header = (
-        "Top {limit} Most Frequently Logged {segment_verbose_plural}".format(
-            limit=top_list_limit,
-            segment_verbose_plural=ACCESS_LOG_SEGMENT_VERBOSE_MAPPING[
-                regex_group_key
-            ][verbose_key]
-        )
-    )
-    table_header_log = 'According to file: {}'.format(log_file_path)
-    header_len = max(
-        len(table_header),
-        len(table_header_log)
-    )
-    header_separator = ''.ljust(header_len, '=')
-    print(header_separator)
-    print(table_header.center(header_len))
-    print(table_header_log.center(header_len))
-    print(header_separator)
-    for num, payload in enumerate(c.most_common(n=top_list_limit), start=1):
-        ip, count = payload
-        print(
-            "{num}. {ip}: {count}".format(
-                num=str(num).rjust(2),
-                ip=ip.ljust(16),
-                count=count
-            )
-        )
+    print_report(c, top_list_limit)
