@@ -1,7 +1,11 @@
 """Tests for nginx-access-log-frequency."""
 
 import unittest
-from StringIO import StringIO
+try:
+    from StringIO import StringIO
+except ImportError:
+    # Python 3.x
+    from io import StringIO
 import sys
 
 from nginx_access_log_frequency import (
