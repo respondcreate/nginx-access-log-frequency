@@ -1,5 +1,4 @@
-
-[![GitHub Logo](https://img.shields.io/coveralls/respondcreate/nginx-access-log-frequency.svg?style=flat)](https://coveralls.io/github/respondcreate/nginx-access-log-frequency)
+[![travis-ci](https://travis-ci.org/respondcreate/nginx-access-log-frequency.svg?branch=master)](https://travis-ci.org/respondcreate/nginx-access-log-frequency/) [![coveralls](https://img.shields.io/coveralls/respondcreate/nginx-access-log-frequency.svg?style=flat)](https://coveralls.io/github/respondcreate/nginx-access-log-frequency)
 
 # nginx-access-log-frequency
 
