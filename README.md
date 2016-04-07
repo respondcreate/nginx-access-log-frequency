@@ -1,3 +1,6 @@
+
+[![GitHub Logo](https://img.shields.io/coveralls/respondcreate/nginx-access-log-frequency.svg?style=flat)](https://coveralls.io/github/respondcreate/nginx-access-log-frequency)
+
 # nginx-access-log-frequency
 
 Determine the most frequently logged values from a standard nginx access log.

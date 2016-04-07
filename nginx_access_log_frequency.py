@@ -209,8 +209,7 @@ def print_report(counter_instance,
             )
         )
 
-
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     parser = create_parser()
 
     # Arguments to set
