@@ -2,23 +2,9 @@
 
 # nginx-access-log-frequency
 
-Determine the most frequently logged values from a standard nginx access log.
+Determine the most frequently logged IP values from a standard nginx access log.
 
 ## Optional Arguments
-
-* `-s, --segment <segment>`
-                        
-    The data segment whose frequency you'd like to determine. Allowed choices:
-
-    * `status_code` (Status Code)
-    * `remote_user` (Remote User)
-    * `ip_address` (IP Address)
-    * `http_user_agent` (User Agent)
-    * `http_referrer` (Referrer)
-
-    **Default:** `ip_address`
-
-* `-l, --limit <limit>`
 
     An integer which determines the length of the list returned.
 
@@ -35,7 +21,7 @@ Determine the most frequently logged values from a standard nginx access log.
 To see a list of the top 10 most frequently logged IP addresses:
 
 ```bash
-$ python nginx_access_log_frequency.py --segment ip_address --limit 10
+$ python nginx_access_log_frequency.py --limit 10
 ```
 
 To see a list of the top 5 most frequently logged user agents from a log file stored in a location other than `/var/log/nginx/access.log`:
