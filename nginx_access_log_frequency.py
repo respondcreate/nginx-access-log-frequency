@@ -120,7 +120,7 @@ def count_nginx_log_frequency(log_file_path,
     with io.open(log_file_path, 'r') as log_file:
         c = Counter([
             per_line_regex.match(line).group(regex_group_key)
-            for line in log_file.readlines()
+            for line in log_file
         ])
     return c
 
