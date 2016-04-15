@@ -21,13 +21,13 @@ Determine the most frequently logged IP values from a standard nginx access log.
 To see a list of the top 10 most frequently logged IP addresses:
 
 ```bash
-$ python nginx_access_log_frequency.py --limit 10
+$ python nginx_access_log_ip_frequency.py --limit 10
 ```
 
 To see a list of the top 5 most frequently logged user agents from a log file stored in a location other than `/var/log/nginx/access.log`:
 
 ```bash
-$ python nginx_access_log_frequency.py -s http_user_agent -l 5 -f /var/log/custom-log-location/access.log
+$ python nginx_access_log_ip_frequency.py -s http_user_agent -l 5 -f /var/log/custom-log-location/access.log
 ```
 
 **NOTE:** If you've cloned down this repo and want to test this script but don't have an nginx access log handy just include `-f example-access.log` to use the included example log.

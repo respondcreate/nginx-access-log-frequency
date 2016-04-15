@@ -8,7 +8,7 @@ except ImportError:
     from io import StringIO
 import sys
 
-from nginx_access_log_frequency import (
+from nginx_access_log_ip_frequency import (
     count_nginx_log_ip_address_frequency,
     create_parser,
     print_report

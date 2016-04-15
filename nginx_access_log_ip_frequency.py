@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-nginx_access_log_frequency.py
+nginx_access_log_ip_frequency.py
 
 Determine the most frequently logged IP values from a standard nginx access log.
 
@@ -9,12 +9,12 @@ Examples:
 
     Print out a list of the top 10 most frequently logged IP addresses:
 
-        $ python nginx_access_log_frequency.py -s ip_address
+        $ python nginx_access_log_ip_frequency.py -s ip_address
 
     Print out a list of the top 5 most frequently logged user agents from
     a log file stored in a custom location:
 
-        $ python nginx_access_log_frequency.py -l 5
+        $ python nginx_access_log_ip_frequency.py -l 5
           -f /var/log/custom-log-location/access.log
 """
 
