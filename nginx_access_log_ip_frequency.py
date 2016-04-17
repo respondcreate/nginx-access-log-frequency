@@ -3,7 +3,7 @@
 """
 nginx_access_log_ip_frequency.py
 
-Determine the most frequently logged IP values from a standard nginx access log.
+Determine the most frequently logged IP addresses in a nginx access log.
 
 Examples:
 
